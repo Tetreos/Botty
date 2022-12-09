@@ -51,20 +51,20 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-  client.user.setStatus('dnd');
-  client.user.setActivity('JoJo\'s Bizarre Adventure', { type: ActivityType.Watching });
+	client.user.setStatus('dnd');
+	client.user.setActivity('JoJo\'s Bizarre Adventure', { type: ActivityType.Watching });
 });
 
 client.on('messageCreate', async (message) => {
-  if (checkCommand(message, 'help')) {
-    const reply = await message.reply({ content : 'You triggered the help command!', allowedMentions : { parse: []}})
-  }
-  if (checkCommand(message, 'ping')) {
-    const reply = await message.channel.send(`Latency is ${message.createdTimestamp - Date.now()}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
-  }
-  if (checkCommand(message, 'test')) {
-    const reply = await message.reply({ embeds : [exampleEmbed] })
-  }
+	if (checkCommand(message, 'help')) {
+	const reply = await message.reply({ content : 'You triggered the help command!', allowedMentions : { parse: []}})
+	}
+	if (checkCommand(message, 'ping')) {
+	const reply = await message.channel.send(`Latency is ${message.createdTimestamp - Date.now()}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
+	}
+	if (checkCommand(message, 'test')) {
+	const reply = await message.reply({ embeds : [exampleEmbed] })
+	}
 });
 
 client.login(token);
