@@ -1,2 +1,0 @@
-# Botty
-Discord Bot
