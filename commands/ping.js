@@ -12,7 +12,7 @@ module.exports = {
 		})
 		.setColor('#fee75c')
 		.setDescription(`
-		**Latency:** ${i.createdTimestamp - Date.now())} ms
+		**Latency:** ${(i.createdTimestamp - Date.now())} ms
 		**API:** ${Math.round(i.client.ws.ping)} ms
 		`)
 		await i.reply({ embeds: [Embed] });
