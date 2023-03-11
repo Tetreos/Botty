@@ -1,15 +1,20 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
-		.setDescription('Replies with Pong!'),
+		.setDescription('Returns roundtrip time and API latency'),
 	async execute(i) {
-		if (i.type === 2) {
-			await i.reply(`Latency is ${i.createdTimestamp - Date.now()}ms. API Latency is ${Math.round(i.client.ws.ping)}ms`);
-		}
-		else {
-			await i.reply(`Latency is ${i.createdTimestamp - Date.now()}ms. API Latency is ${Math.round(i.client.ws.ping)}ms`);
-		}
+		const Embed = new EmbedBuilder()
+		.setAuthor({
+			name: `${i.client.user.username}'s Ping`,
+			iconURL: i.client.user.displayAvatarURL({ size: 2048 }),
+		})
+		.setColor('#fee75c')
+		.setDescription(`
+		**Roundtrip:** ${Math.round(Date.now() - i.createdTimestamp)} ms
+		**API:** ${Math.round(i.client.ws.ping)} ms
+		`)
+		await i.reply({ embeds: [Embed] });
 	},
 };

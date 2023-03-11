@@ -1,9 +1,13 @@
-//require('./deploy-commands.js');
-
+const { deploy } = require('./deploy-commands');
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, GatewayIntentBits, ActivityType, Events, Collection } = require('discord.js');
-const { token } = require('./config.json');
+
+const dotenv = require("dotenv")
+require('dotenv').config()
+const TOKEN = process.env.TOKEN
+const GUILDID = process.env.GUILDID
+
 const prefix = '!'
 
 const client = new Client({ 
@@ -43,8 +47,8 @@ client.on(Events.InteractionCreate, async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
+		console.error(`Error executing ${interaction.commandName}`);
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 
@@ -54,16 +58,18 @@ client.once(Events.ClientReady, c => {
 	client.user.setActivity('JoJo\'s Bizarre Adventure', { type: ActivityType.Watching });
 });
 
+/*
 client.on('messageCreate', async (message) => {
 	if (message.content.toLowerCase().startsWith(prefix)) {
 		try {
 			const command = client.commands.get(message.content.slice(1));
-			command.execute(message);
+			command.execute(message, client);
 		} catch (error) {
 			console.error(error);
 			await message.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 		}
 	}
 });
+*/
 
-client.login(token);
+client.login(TOKEN);
