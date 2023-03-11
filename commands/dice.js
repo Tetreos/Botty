@@ -16,8 +16,8 @@ module.exports = {
         const dice = i.options.getString('dice');
         const sides = i.options.getString('sides');
 
-        if(isNaN(dice) && isNaN(sides)) {
-            return i.reply('Not a number!');
+        if(isNaN(dice) || isNaN(sides) || dice <= 0 || sides <= 0) {
+            return i.reply('Only positive integers are allowed!');
         }
 
         let result = 0
