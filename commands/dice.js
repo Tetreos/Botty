@@ -22,7 +22,7 @@ module.exports = {
 			iconURL: i.user.avatarURL(),
 		})
 
-        if(isNaN(dice) || isNaN(sides) || dice <= 0 || sides <= 0) {
+        if(!isInteger(dice) || !isInteger(sides) || dice <= 0 || sides <= 0) {
             return i.reply('Only positive integers are allowed!');
         }
 
